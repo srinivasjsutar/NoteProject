@@ -58,6 +58,8 @@ function NotesList({ isDarkMode }) {
 
   if (!notes || notes.length === 0) {
     return <h1>No notes available. Add a new note!</h1>;
+  } else {
+    return <h1>Loading </h1>;
   }
 
   return (
