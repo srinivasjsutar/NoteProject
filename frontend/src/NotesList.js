@@ -6,12 +6,19 @@ import { jsPDF } from "jspdf";
 
 function NotesList({ isDarkMode }) {
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch notes from backend on component mount
   useEffect(() => {
     const fetchNotes = async () => {
-      const fetchedNotes = await getNotes();
-      setNotes(fetchedNotes || []);
+      try {
+        const fetchedNotes = await getNotes();
+        setNotes(fetchedNotes || []);
+      } catch (error) {
+        console.error("Error fetching notes:", error);
+      } finally {
+        setLoading(false); 
+      }
     };
 
     fetchNotes();
@@ -56,9 +63,13 @@ function NotesList({ isDarkMode }) {
     }
   };
 
+  if (loading) {
+    return <h1>Loading notes...</h1>;
+  }
+
   if (!notes || notes.length === 0) {
     return <h1>No notes available. Add a new note!</h1>;
-  } 
+  }
 
   return (
     <div className={`notes-list-container ${isDarkMode ? "dark" : ""}`}>
