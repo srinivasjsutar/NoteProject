@@ -1,4 +1,4 @@
-const API_URL = "https://noteproject-1.onrender.com/api/notes";
+const API_URL = "https://noteproject-1.onrender.com";
 
 export const getNotes = async () => {
   const response = await fetch(API_URL);
