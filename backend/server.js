@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const notesRouter = require("./routes/notes");
 require("dotenv").config();
+mongoose.set("bufferCommands", false);
 
 const app = express();
 app.use(
